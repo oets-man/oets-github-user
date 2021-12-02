@@ -13,11 +13,6 @@ interface ApiService {
     @Headers("Authorization: token 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")
     fun getUserBy(@Query("q") query: String): Call<UserSearchResponse>
 
-    //tes
-    @GET("search/users")
-    @Headers("Authorization: token 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")
-    fun getUserBy2(@Query("q") query: String): Call<List<UserResponseItem>>
-
     @GET("users/{login}")
     @Headers("Authorization: token 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")
     fun getUserDetail(

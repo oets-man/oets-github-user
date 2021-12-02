@@ -69,44 +69,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
-    private fun showUsersBy2(query: String) {
-        showLoading(true)
-        val client = ApiConfig.getApiService().getUserBy2(query)
-        client.enqueue(object : Callback<List<UserResponseItem>> {
-            override fun onResponse(
-                call: Call<List<UserResponseItem>>,
-                response: Response<List<UserResponseItem>>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        val result = responseBody.toString()
-                        Log.d("resultcari", result)
-                        for (i in responseBody.indices) {
-                            val jsonArray = responseBody[i]
-                            val login: String = jsonArray.login
-                            getUserDetail(login)
-                        }
-                    }
-                } else {
-                    Log.e("responnotsuccess", "Mungin kena limit")
-                }
-            }
-
-            override fun onFailure(call: Call<List<UserResponseItem>>, t: Throwable) {
-                showLoading(false)
-                Log.e("gagalfind", "onFailure: ${t.message}")
-            }
-        })
-    }
-
-
-
-
-
-
     private fun showUserAll() {
         showLoading(true)
         val client = ApiConfig.getApiService().getUsers()
@@ -234,7 +196,6 @@ class MainActivity : AppCompatActivity() {
                 if (query != null) {
                     listData.clear()
                     showUsersBy(query)
-//                    showUsersBy2(query)
                 }
                 return true
             }
