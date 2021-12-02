@@ -1,12 +1,15 @@
 package com.example.githubuser
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_follower.*
 import kotlinx.android.synthetic.main.fragment_following.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -99,16 +102,33 @@ class FollowingFragment : Fragment() {
     }
 
     private fun showRecyclerList() {
-
         rv_following.layoutManager = LinearLayoutManager(activity)
-        val listDataAdapter = UserListAdapter(listData)
         rv_following.adapter = adapter
+        val listUserAdapter = UserListAdapter(listData)
+        rv_following.adapter = listUserAdapter
 
-        listDataAdapter.setOnItemClickCallback(object :
-            UserListAdapter.OnItemClickCallback {
-
+        listUserAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UserDetailResponse) {
-                // nanti dulu
+                showSelectedUser(data)
+            }
+
+            private fun showSelectedUser(data: UserDetailResponse) {
+//                Toast.makeText(activity, data.login, Toast.LENGTH_SHORT).show()
+
+                val user = UserDetailResponse(
+                    data.followers,
+                    data.avatarUrl,
+                    data.following,
+                    data.name,
+                    data.company,
+                    data.location,
+                    data.publicRepos,
+                    data.login
+                )
+                requireActivity().run {
+                    startActivity(Intent(this, UserDetailActivity::class.java).putExtra(UserDetailActivity.EXTRA_USER,user))
+                    finish() // If activity no more needed in back stack
+                }
             }
         })
     }

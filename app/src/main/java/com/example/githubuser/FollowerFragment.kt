@@ -101,17 +101,35 @@ class FollowerFragment : Fragment() {
     }
 
     private fun showRecyclerList() {
-
         rv_follower.layoutManager = LinearLayoutManager(activity)
-        val listDataAdapter = UserListAdapter(listData)
         rv_follower.adapter = adapter
+        val listUserAdapter = UserListAdapter(listData)
+        rv_follower.adapter = listUserAdapter
 
-//        listDataAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
-//
-//            override fun onItemClicked(data: UserDetailResponse) {
-//                Toast.makeText(activity, "Text!", Toast.LENGTH_SHORT).show();
-//            }
-//        })
+        listUserAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: UserDetailResponse) {
+                showSelectedUser(data)
+            }
+
+            private fun showSelectedUser(data: UserDetailResponse) {
+//                Toast.makeText(activity, data.login, Toast.LENGTH_SHORT).show()
+
+                val user = UserDetailResponse(
+                    data.followers,
+                    data.avatarUrl,
+                    data.following,
+                    data.name,
+                    data.company,
+                    data.location,
+                    data.publicRepos,
+                    data.login
+                )
+                requireActivity().run {
+                    startActivity(Intent(this, UserDetailActivity::class.java).putExtra(UserDetailActivity.EXTRA_USER,user))
+                    finish() // If activity no more needed in back stack
+                }
+            }
+        })
     }
 
 
