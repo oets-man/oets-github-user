@@ -1,11 +1,13 @@
 package com.example.githubuser
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_follower.*
 import retrofit2.Call
@@ -15,8 +17,9 @@ import retrofit2.Response
 
 class FollowerFragment : Fragment() {
     private var listData: ArrayList<UserDetailResponse> = ArrayList()
-    private lateinit var adapter: FollowerAdapter
-//    private lateinit var binding: FragmentFollowerBinding
+    private lateinit var adapter: UserListAdapter
+
+    //    private lateinit var binding: FragmentFollowerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +31,9 @@ class FollowerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = FollowerAdapter(listData)
-        val dataUser = activity?.intent?.getParcelableExtra<UserDetailResponse>(UserDetailActivity.EXTRA_USER) as UserDetailResponse
+        adapter = UserListAdapter(listData)
+        val dataUser =
+            activity?.intent?.getParcelableExtra<UserDetailResponse>(UserDetailActivity.EXTRA_USER) as UserDetailResponse
         Log.d("data user", dataUser.toString())
         Log.d("login", dataUser.login.toString())
         progressBarFollower.visibility = View.GONE
@@ -99,17 +103,15 @@ class FollowerFragment : Fragment() {
     private fun showRecyclerList() {
 
         rv_follower.layoutManager = LinearLayoutManager(activity)
-        val listDataAdapter =
-            FollowingAdapter(listData)
+        val listDataAdapter = UserListAdapter(listData)
         rv_follower.adapter = adapter
 
-        listDataAdapter.setOnItemClickCallback(object :
-            FollowingAdapter.OnItemClickCallback {
-
-            override fun onItemClicked(data: UserDetailResponse) {
-                // nanti dulu
-            }
-        })
+//        listDataAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
+//
+//            override fun onItemClicked(data: UserDetailResponse) {
+//                Toast.makeText(activity, "Text!", Toast.LENGTH_SHORT).show();
+//            }
+//        })
     }
 
 

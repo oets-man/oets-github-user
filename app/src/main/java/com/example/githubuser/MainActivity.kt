@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvUsers.setHasFixedSize(true)
 
-        listUser()
-        showRecyclerList()
+        showUserAll()
+//        showRecyclerList()
 
         supportActionBar?.title = "Cari User GitHub"
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun findUsersBy(query: String) {
+    private fun showUsersBy(query: String) {
         val client = ApiConfig.getApiService().getUserBy(query)
         client.enqueue(object : Callback<UserSearchResponse> {
             override fun onResponse(
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun listUser() {
+    private fun showUserAll() {
         showLoading(true)
         val client = ApiConfig.getApiService().getUsers()
         client.enqueue(object : Callback<List<UserResponseItem>> {
@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
 
             private fun setUser(user: UserDetailResponse?) {
                 listData.add(user!!)
+                showRecyclerList()
             }
         })
     }
@@ -197,7 +198,7 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     listData.clear()
-                    findUsersBy(query)
+                    showUsersBy(query)
                 }
                 return true
             }

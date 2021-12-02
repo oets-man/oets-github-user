@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class FollowingFragment : Fragment() {
     private var listData: ArrayList<UserDetailResponse> = ArrayList()
-    private lateinit var adapter: FollowingAdapter
+    private lateinit var adapter: UserListAdapter
 
     //    private lateinit var binding: FragmentFollowerBinding
     override fun onCreateView(
@@ -29,7 +29,7 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = FollowingAdapter(listData)
+        adapter = UserListAdapter(listData)
         val dataUser =
             activity?.intent?.getParcelableExtra<UserDetailResponse>(UserDetailActivity.EXTRA_USER) as UserDetailResponse
         Log.d("data user", dataUser.toString())
@@ -101,11 +101,11 @@ class FollowingFragment : Fragment() {
     private fun showRecyclerList() {
 
         rv_following.layoutManager = LinearLayoutManager(activity)
-        val listDataAdapter = FollowingAdapter(listData)
+        val listDataAdapter = UserListAdapter(listData)
         rv_following.adapter = adapter
 
         listDataAdapter.setOnItemClickCallback(object :
-            FollowingAdapter.OnItemClickCallback {
+            UserListAdapter.OnItemClickCallback {
 
             override fun onItemClicked(data: UserDetailResponse) {
                 // nanti dulu
