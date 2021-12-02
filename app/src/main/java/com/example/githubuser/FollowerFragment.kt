@@ -1,15 +1,12 @@
 package com.example.githubuser
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.databinding.FragmentFollowerBinding
 import kotlinx.android.synthetic.main.fragment_follower.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -103,11 +100,11 @@ class FollowerFragment : Fragment() {
 
         rv_follower.layoutManager = LinearLayoutManager(activity)
         val listDataAdapter =
-            FollowerAdapter(listData)
+            FollowingAdapter(listData)
         rv_follower.adapter = adapter
 
         listDataAdapter.setOnItemClickCallback(object :
-            FollowerAdapter.OnItemClickCallback {
+            FollowingAdapter.OnItemClickCallback {
 
             override fun onItemClicked(data: UserDetailResponse) {
                 // nanti dulu
