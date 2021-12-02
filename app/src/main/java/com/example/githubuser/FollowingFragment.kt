@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_follower.*
 import kotlinx.android.synthetic.main.fragment_following.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +19,6 @@ class FollowingFragment : Fragment() {
     private var listData: ArrayList<UserDetailResponse> = ArrayList()
     private lateinit var adapter: UserListAdapter
 
-    //    private lateinit var binding: FragmentFollowerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

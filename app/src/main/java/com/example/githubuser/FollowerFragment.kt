@@ -19,7 +19,6 @@ class FollowerFragment : Fragment() {
     private var listData: ArrayList<UserDetailResponse> = ArrayList()
     private lateinit var adapter: UserListAdapter
 
-    //    private lateinit var binding: FragmentFollowerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
