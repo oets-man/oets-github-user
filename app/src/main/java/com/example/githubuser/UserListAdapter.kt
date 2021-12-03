@@ -41,7 +41,7 @@ class UserListAdapter(private val listUser: ArrayList<UserDetailResponse>) :
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.bindingAdapterPosition]) }
     }
 
-    override fun getItemCount() = listUser.size
+    override fun getItemCount(): Int = listUser.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: UserDetailResponse)
