@@ -1,9 +1,8 @@
 package com.example.githubuser
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.githubuser.databinding.ActivityUserAvatarBinding
 
 class UserAvatarActivity : AppCompatActivity() {

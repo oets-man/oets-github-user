@@ -2,10 +2,10 @@ package com.example.githubuser
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.githubuser.databinding.ActivityUserDetailBinding
 import com.google.android.material.tabs.TabLayout
@@ -45,7 +45,8 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
-        supportActionBar?.elevation = 0f
+//        supportActionBar?.elevation = 0f
+        supportActionBar?.hide()  //sepertinya lebih menarik
     }
 
     override fun onClick(v: View?) {
