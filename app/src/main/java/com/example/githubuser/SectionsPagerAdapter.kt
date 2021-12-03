@@ -1,7 +1,11 @@
 package com.example.githubuser
 
+import android.content.Context
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 //constructor yang diperlukan yaitu AppCompatActivity karena kita menggunakan Activity.
@@ -23,3 +27,4 @@ class SectionsPagerAdapter(activity:AppCompatActivity):FragmentStateAdapter(acti
     }
 
 }
+

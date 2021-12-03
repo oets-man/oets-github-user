@@ -1,5 +1,7 @@
 package com.example.githubuser
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +11,8 @@ import com.example.githubuser.databinding.AdapterUserListBinding
 
 class UserListAdapter(private val listUser: ArrayList<UserDetailResponse>) :
     RecyclerView.Adapter<UserListAdapter.ListViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -39,7 +41,7 @@ class UserListAdapter(private val listUser: ArrayList<UserDetailResponse>) :
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.bindingAdapterPosition]) }
     }
 
-    override fun getItemCount(): Int = listUser.size
+    override fun getItemCount() = listUser.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: UserDetailResponse)

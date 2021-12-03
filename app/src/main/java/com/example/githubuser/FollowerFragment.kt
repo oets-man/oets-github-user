@@ -30,6 +30,7 @@ class FollowerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = UserListAdapter(listData)
+
         val dataUser =
             activity?.intent?.getParcelableExtra<UserDetailResponse>(UserDetailActivity.EXTRA_USER) as UserDetailResponse
         Log.d("data user", dataUser.toString())
@@ -38,6 +39,8 @@ class FollowerFragment : Fragment() {
 
         listData.clear()
         getFollowers(dataUser.login.toString())
+
+
     }
 
     private fun getFollowers(login: String) {
