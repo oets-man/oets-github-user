@@ -8,143 +8,25 @@
     <string name="avatar_user">Avatar User</string>
     <string name="_123">123</string>
     <string name="menu_1">Pengaturan</string>
-    <string name="sampel_text">
-        Video provides a powerful way to help you prove your point. When you click Online Video,
-        you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
-        To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other.
-    </string>
-    <string name="cari">Cari Username</string>
     <string name="avatar">Avatar</string>
+    <string name="id">Id: %1$s</string>
+    <string name="type">Type: %1$s</string>
 
     <string name="tab_text_1">Follower</string>
     <string name="tab_text_2">Following</string>
     <string name="pilih_tab">pilih tab</string>
     <string name="search">Cari user</string>
     <string name="search_hint">Cari berdasarkan user login</string>
+    <string name="title_activity_splash_screen">GitHub Users</string>
 
-    <string-array name="data_username">
-        <item>oets-man</item>
-        <item>JakeWharton</item>
-        <item>amitshekhariitbhu</item>
-        <item>romainguy</item>
-        <item>chrisbanes</item>
-        <item>tipsy</item>
-        <item>ravi8x</item>
-        <item>jasoet</item>
-        <item>budioktaviyan</item>
-        <item>hendisantika</item>
-        <item>sidiqpermana</item>
-    </string-array>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
-    <string-array name="data_name">
-        <item>Usman Husnan</item>
-        <item>Jake Wharton</item>
-        <item>Amit Shekhar</item>
-        <item>Romain Guy</item>
-        <item>Chris Banes</item>
-        <item>David</item>
-        <item>Ravi Tamada</item>
-        <item>Deny Prasetyo</item>
-        <item>Budi Oktaviyan</item>
-        <item>Hendi Santika</item>
-        <item>Sidiq Permana</item>
-    </string-array>
-
-    <string-array name="data_location">
-        <item>Bangkalan, Indonesia</item>
-        <item>Pittsburgh, PA, USA</item>
-        <item>New Delhi, India</item>
-        <item>California</item>
-        <item>Sydney, Australia</item>
-        <item>Trondheim, Norway</item>
-        <item>India</item>
-        <item>Kotagede, Yogyakarta, Indonesia</item>
-        <item>Jakarta, Indonesia</item>
-        <item>Bojongsoang - Bandung Jawa Barat</item>
-        <item>Jakarta Indonesia</item>
-    </string-array>
-
-    <string-array name="data_repository">
-        <item>1</item>
-        <item>102</item>
-        <item>37</item>
-        <item>9</item>
-        <item>30</item>
-        <item>56</item>
-        <item>28</item>
-        <item>44</item>
-        <item>110</item>
-        <item>1064</item>
-        <item>65</item>
-    </string-array>
-
-    <string-array name="data_company">
-        <item>On Home</item>
-        <item>Google, Inc.</item>
-        <item>MindOrksOpenSource</item>
-        <item>Google</item>
-        <item>Google working on @android</item>
-        <item>Working Group Two</item>
-        <item>AndroidHive | Droid5</item>
-        <item>gojek-engineering</item>
-        <item>KotlinID</item>
-        <item>JVMDeveloperID @KotlinID @IDDevOps</item>
-        <item>Nusantara Beta Studio</item>
-    </string-array>
-
-    <string-array name="data_followers">
-        <item>99999</item>
-        <item>56995</item>
-        <item>5153</item>
-        <item>7972</item>
-        <item>14725</item>
-        <item>788</item>
-        <item>18628</item>
-        <item>277</item>
-        <item>178</item>
-        <item>428</item>
-        <item>465</item>
-    </string-array>
-
-    <string-array name="data_following">
-        <item>1212</item>
-        <item>12</item>
-        <item>2</item>
-        <item>0</item>
-        <item>1</item>
-        <item>0</item>
-        <item>3</item>
-        <item>39</item>
-        <item>23</item>
-        <item>61</item>
-        <item>10</item>
-    </string-array>
-
-    <string-array name="data_avatar1">
-        <item>@drawable/user0</item>
-        <item>@drawable/user1</item>
-        <item>@drawable/user2</item>
-        <item>@drawable/user3</item>
-        <item>@drawable/user4</item>
-        <item>@drawable/user5</item>
-        <item>@drawable/user6</item>
-        <item>@drawable/user7</item>
-        <item>@drawable/user8</item>
-        <item>@drawable/user9</item>
-        <item>@drawable/user10</item>
-    </string-array>
-
-    <string-array name="data_avatar">
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-        <item>https://upload.wikimedia.org/wikipedia/commons/8/87/Ahmad_Dahlan.jpg</item>
-    </string-array>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
