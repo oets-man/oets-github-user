@@ -1,4 +1,4 @@
-package com.example.githubuser.view
+package com.example.githubuser.follower
 
 import android.util.Log
 import androidx.lifecycle.LiveData

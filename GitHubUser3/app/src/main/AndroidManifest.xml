@@ -15,7 +15,7 @@
             android:name=".setting.ThemeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:exported="true"
             android:label="@string/title_activity_splash_screen"
             android:theme="@style/Theme.GitHubUser.NoActionBar">
@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.UserDetailActivity"
+            android:name=".detail.UserDetailActivity"
             android:exported="false"
             android:label="@string/activity_user_detail" />
         <activity
-            android:name=".view.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true" />
     </application>
 

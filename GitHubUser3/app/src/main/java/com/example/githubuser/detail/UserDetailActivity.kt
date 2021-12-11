@@ -1,4 +1,4 @@
-package com.example.githubuser.view
+package com.example.githubuser.detail
 
 import android.app.Dialog
 import android.graphics.Color
@@ -13,6 +13,7 @@ import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityUserDetailBinding
 import com.example.githubuser.model.UserDetailResponse
 import com.example.githubuser.model.UserResponseItem
+import com.example.githubuser.SectionsPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

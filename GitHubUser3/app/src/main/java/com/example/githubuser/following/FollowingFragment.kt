@@ -1,4 +1,4 @@
-package com.example.githubuser.view
+package com.example.githubuser.following
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.model.UserResponseItem
+import com.example.githubuser.detail.UserDetailActivity
+import com.example.githubuser.UserListAdapter
 
 
 class FollowingFragment : Fragment() {

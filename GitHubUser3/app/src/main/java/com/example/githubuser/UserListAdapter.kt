@@ -1,11 +1,10 @@
-package com.example.githubuser.view
+package com.example.githubuser
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.githubuser.R
 import com.example.githubuser.databinding.AdapterUserListBinding
 import com.example.githubuser.model.UserResponseItem
 
