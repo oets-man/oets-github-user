@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">"GitHub User's"</string>
+    <string name="app_name">"GitHub Users"</string>
     <string name="activity_user_detail">User Detail</string>
     <string name="full_name">Nama Lengkap</string>
     <string name="user_name">username</string>
@@ -29,4 +29,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="pengaturan">Pengaturan</string>
 </resources>

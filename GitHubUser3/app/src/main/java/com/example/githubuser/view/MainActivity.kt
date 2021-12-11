@@ -1,14 +1,22 @@
 package com.example.githubuser.view
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,9 +24,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.model.UserResponseItem
+import com.example.githubuser.setting.*
+import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.*
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class MainActivity : AppCompatActivity() {
+
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
@@ -31,9 +44,6 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Cari User GitHub"
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
-
         val layoutManager = LinearLayoutManager(this)
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUsers.setHasFixedSize(true)
@@ -42,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         showRecyclerList()
 
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.showUsersBy("sidi")
         viewModel.getUsers().observe(this, {
             val listUserAdapter = UserListAdapter(it.items)
@@ -57,7 +68,24 @@ class MainActivity : AppCompatActivity() {
             showLoading(it)
         })
 
+        showTheme()
+
     }
+
+    private fun showTheme() {
+        val pref = ThemePreferences.getInstance(dataStore)
+        val themeViewModel =
+            ViewModelProvider(this, ThemeViewModelFactory(pref,))[ThemeViewModel::class.java]
+        themeViewModel.getThemeSettings().observe(this,
+            { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            })
+    }
+
 
     private fun showRecyclerList() {
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -103,6 +131,17 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.switch_theme) {
+            val intent = Intent(
+                this, ThemeActivity::class.java
+            )
+            startActivity(intent)
+        }
         return true
     }
 
