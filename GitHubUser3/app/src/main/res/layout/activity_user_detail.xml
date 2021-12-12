@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".detail.UserDetailActivity">
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+
+        android:background="@color/transparent"
+        android:src="@drawable/ic_favorite_border_48"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_detail_avatar"
         android:layout_width="150dp"
@@ -14,7 +30,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/avatar_user"/>
+        android:contentDescription="@string/avatar_user"
+        tools:src="@tools:sample/avatars"
+        />
 
     <ProgressBar
         android:id="@+id/progressBarDetail"

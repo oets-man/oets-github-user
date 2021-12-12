@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/drawable/ic_favorite_border.xml" value="0.37864583333333335" />
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/drawable/ic_favorite_border_48.xml" value="0.37864583333333335" />
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/activity_setting.xml" value="0.3625" />
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
         <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/activity_theme.xml" value="0.20260416666666667" />
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/activity_user_detail.xml" value="0.22" />
+        <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/adapter_user_list.xml" value="0.3625" />
         <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/layout/dialog_theme.xml" value="0.3625" />
         <entry key="..\:/myApk/GitHubUser/GitHubUser3/app/src/main/res/menu/option_menu.xml" value="0.3625" />
       </map>
