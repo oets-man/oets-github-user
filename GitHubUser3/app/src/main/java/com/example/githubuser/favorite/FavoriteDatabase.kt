@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-//@Database(entities = [FavoriteEntity::class], version = 1)
-//abstract class FavoriteDatabase : RoomDatabase() {
-//    abstract fun favoriteDao(): FavoriteDao
-//
+@Database(entities = [FavoriteEntity::class], version = 1)
+abstract class FavoriteDatabase : RoomDatabase() {
+    abstract fun favoriteDao(): FavoriteDao
+
 //    companion object {
 //        @Volatile
 //        private var INSTANCE: FavoriteDatabase? = null
@@ -27,9 +27,4 @@ import androidx.room.RoomDatabase
 //            return INSTANCE as FavoriteDatabase
 //        }
 //    }
-//}
-
-@Database(entities = [FavoriteEntity::class], version = 1)
-abstract class FavoriteDatabase: RoomDatabase() {
-    abstract fun favoriteDao(): FavoriteDao
 }

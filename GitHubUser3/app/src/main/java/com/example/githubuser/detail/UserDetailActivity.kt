@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var _binding: ActivityUserDetailBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var data: UserResponseItem
 
     private lateinit var viewModel: UserDetailViewModel
@@ -44,7 +44,7 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityUserDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         supportActionBar?.hide()
 
@@ -58,12 +58,16 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             showUser(it)
         })
 
+        binding?.btnFavorite?.setOnClickListener {
+            updateFavorite()
+        }
+    }
 
+    private fun updateFavorite() {
         //inisialisasi Database
-        db = Room.databaseBuilder(applicationContext, FavoriteDatabase::class.java, "favorite-db")
+        db = Room
+            .databaseBuilder(applicationContext, FavoriteDatabase::class.java, "favorite-db")
             .build()
-
-        binding.btnFavorite.setOnClickListener {
 
 //            val id = data.id.toString().toLong()
 //            val login = data.login.toString()
@@ -79,23 +83,22 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
 //                }
 //            favoriteViewModel.insert(favorite as FavoriteEntity)
 
-            GlobalScope.launch {
-                val favorite = FavoriteEntity(
-                    data.id.toString().toLong(),
-                    data.login.toString(),
-                    data.avatarUrl.toString(),
-                    data.type.toString()
-                )
-                //insert data ke database
-                db.favoriteDao().insert(favorite)
-            }
-            Toast.makeText(this, "tessssssssss", Toast.LENGTH_SHORT).show()
+        GlobalScope.launch {
+            val favorite = FavoriteEntity(
+                data.id.toString().toLong(),
+                data.login.toString(),
+                data.avatarUrl.toString(),
+                data.type.toString()
+            )
+            //insert data ke database
+            db.favoriteDao().insert(favorite)
         }
+        Toast.makeText(this, "tessssssssss", Toast.LENGTH_SHORT).show()
     }
 
     private fun showUser(user: UserDetailResponse) {
         val orange = Color.rgb(255, 165, 0)
-        binding.apply {
+        binding?.apply {
             Glide.with(this@UserDetailActivity)
                 .load(user.avatarUrl)
                 .error(R.drawable.error_image)
@@ -113,7 +116,7 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             tvDetailFollowing.text = StringBuilder("Following: ${user.following}")
             imgDetailAvatar.setOnClickListener(this@UserDetailActivity)
         }
-        binding.progressBarDetail.visibility = View.GONE
+        binding?.progressBarDetail?.visibility = View.GONE
 
         /////////////////////////////////////////////////
 
@@ -155,9 +158,9 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setTabViewPager() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        val viewPager: ViewPager2 = binding.viewPager
+        val viewPager: ViewPager2 = binding!!.viewPager
         viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
+        val tabs: TabLayout = binding!!.tabs
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
