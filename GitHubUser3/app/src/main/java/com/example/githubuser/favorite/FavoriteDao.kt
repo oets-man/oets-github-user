@@ -6,8 +6,8 @@ import androidx.room.*
 @Dao
 interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(favorite: FavoriteEntity)
-//    fun insert(vararg favorite: FavoriteEntity)
+//    fun insert(favorite: FavoriteEntity)
+    fun insert(vararg favorite: FavoriteEntity)
 
     @Update
     fun update(favoriteEntity: FavoriteEntity)
@@ -19,5 +19,5 @@ interface FavoriteDao {
     fun getAllFavorites(): LiveData<List<FavoriteEntity>>
 
     @Query("SELECT  * from FavoriteEntity WHERE id = :id")
-    fun getUserFavoriteById(id: Int): LiveData<List<FavoriteEntity>>
+    fun getUserFavoriteById(id: Long): LiveData<List<FavoriteEntity>>
 }

@@ -25,6 +25,7 @@ import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.setting.*
 import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.UserListAdapter
+//import com.example.githubuser.favorite.FavoriteActivity
 import com.example.githubuser.model.UserResponseItem
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.*
@@ -153,12 +154,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        if (id == R.id.switch_theme) {
-            val intent = Intent(
-                this, ThemeActivity::class.java
-            )
-            startActivity(intent)
+        when (item.itemId) {
+            R.id.switch_theme -> {
+                val intent = Intent(
+                    this, ThemeActivity::class.java
+                )
+                startActivity(intent)
+            }
+            R.id.listFavorite -> {
+//                val intent = Intent(
+//                    this, FavoriteActivity::class.java
+//                )
+//                startActivity(intent)
+            }
         }
         return true
     }

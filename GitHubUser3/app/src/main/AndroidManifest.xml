@@ -12,10 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHubUser">
         <activity
-            android:name=".favorite.ScrollingActivity"
-            android:exported="false"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/Theme.GitHubUser.NoActionBar" />
+            android:name=".favorite.FavoriteListAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".favorite.FavoriteActivity"
+            android:exported="false" />
+
         <activity
             android:name=".setting.ThemeActivity"
             android:exported="false" />

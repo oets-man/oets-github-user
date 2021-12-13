@@ -17,7 +17,8 @@ class UserListAdapter(private val listUser: ArrayList<UserResponseItem>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class ListViewHolder(var binding: AdapterUserListBinding) : RecyclerView.ViewHolder(binding.root)
+    class ListViewHolder(var binding: AdapterUserListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListViewHolder {
         val binding =
@@ -36,7 +37,8 @@ class UserListAdapter(private val listUser: ArrayList<UserResponseItem>) :
             .apply(RequestOptions().override(250, 250))
             .into(holder.binding.imgAvatar)
 
-        holder.binding.tvId.text = holder.itemView.context.getString(R.string.id, data.id.toString())
+        holder.binding.tvId.text =
+            holder.itemView.context.getString(R.string.id, data.id.toString())
         holder.binding.tvType.text = holder.itemView.context.getString(R.string.type, data.type)
 
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(data) }

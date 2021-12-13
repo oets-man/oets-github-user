@@ -1,11 +1,13 @@
 package com.example.githubuser.favorite
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity
-//@Parcelize
+@Parcelize
 data class FavoriteEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
@@ -21,4 +23,4 @@ data class FavoriteEntity(
     var type: String? = null
 
 )
-//    : Parcelable
+    : Parcelable

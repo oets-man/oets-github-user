@@ -3,13 +3,12 @@ package com.example.githubuser.detail
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
@@ -21,9 +20,8 @@ import com.example.githubuser.favorite.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
+@DelicateCoroutinesApi
 class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var _binding: ActivityUserDetailBinding? = null
     private val binding get() = _binding
@@ -32,15 +30,15 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var viewModel: UserDetailViewModel
 
     private var isFavorite = false
+
     private var favorite: FavoriteEntity? = null
     private lateinit var favoriteViewModel: FavoriteViewModel
 
-//    private var note: Note? = null
-//    private lateinit var noteAddUpdateViewModel: NoteAddUpdateViewModel
-
+    //
+//
     lateinit var db: FavoriteDatabase
 
-    @OptIn(DelicateCoroutinesApi::class)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityUserDetailBinding.inflate(layoutInflater)
@@ -58,42 +56,35 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             showUser(it)
         })
 
-        binding?.btnFavorite?.setOnClickListener {
-            updateFavorite()
-        }
+//        binding?.btnFavorite?.setOnClickListener {
+//            updateFavorite()
+//        }
+        favoriteViewModel = obtainViewModel(this@UserDetailActivity)
+        binding?.btnFavorite?.setOnClickListener(this)
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
+        val factory = FavoriteViewFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
     }
 
     private fun updateFavorite() {
         //inisialisasi Database
-        db = Room
-            .databaseBuilder(applicationContext, FavoriteDatabase::class.java, "favorite-db")
-            .build()
-
-//            val id = data.id.toString().toLong()
-//            val login = data.login.toString()
-//            val type = data.type.toString()
-//            val avatarUrl = data.avatarUrl.toString()
-
-//            noteAddUpdateViewModel.insert(note as Note)
-//                favorite.let { favorite ->
-//                    favorite?.id = id
-//                    favorite?.login = login
-//                    favorite?.type = type
-//                    favorite?.avatarUrl = avatarUrl
-//                }
-//            favoriteViewModel.insert(favorite as FavoriteEntity)
-
-        GlobalScope.launch {
-            val favorite = FavoriteEntity(
-                data.id.toString().toLong(),
-                data.login.toString(),
-                data.avatarUrl.toString(),
-                data.type.toString()
-            )
-            //insert data ke database
-            db.favoriteDao().insert(favorite)
-        }
-        Toast.makeText(this, "tessssssssss", Toast.LENGTH_SHORT).show()
+//        db = Room
+//            .databaseBuilder(applicationContext, FavoriteDatabase::class.java, "favorite-db")
+//            .build()
+//
+//        GlobalScope.launch {
+//            val favorite = FavoriteEntity(
+//                data.id.toString().toLong(),
+//                data.login.toString(),
+//                data.avatarUrl.toString(),
+//                data.type.toString()
+//            )
+//            //insert data ke database
+//            db.favoriteDao().insert(favorite)
+//        }
+//        Toast.makeText(this, "${data.login} sudah berhasil ditambahkan.", Toast.LENGTH_SHORT).show()
     }
 
     private fun showUser(user: UserDetailResponse) {
@@ -114,46 +105,10 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             tvDetailRepository.text = StringBuilder("Repository: ${user.publicRepos}")
             tvDetailFollower.text = StringBuilder("Follower: ${user.followers}")
             tvDetailFollowing.text = StringBuilder("Following: ${user.following}")
+
+            progressBarDetail.visibility = View.GONE
             imgDetailAvatar.setOnClickListener(this@UserDetailActivity)
         }
-        binding?.progressBarDetail?.visibility = View.GONE
-
-        /////////////////////////////////////////////////
-
-//        val favorite = FavoriteEntity()
-//        favorite.login = "aaa"
-//        favorite.avatar = "asbm"
-//        favorite.id=1
-
-//        favoriteCRUD.getFavoriteByLogin(favorite.login!!)
-//            .observe(this@UserDetailActivity, { listFavorite ->
-//                isFavorite = listFavorite.isNotEmpty()
-//
-////                if (listFavorite.isEmpty()) {
-////                    binding.starButton.setImageResource(android.R.drawable.star_big_off)
-////                } else {
-////                    binding.starButton.setImageResource(android.R.drawable.star_big_on)
-////
-////                }
-//            })
-
-//        binding.btnFavorite.apply {
-//            setOnClickListener {
-//                favoriteCRUD.insert(favorite)
-////                if (isFavorite) {
-////                    favoriteCRUD.delete(FavoriteTable())
-////                } else {
-////                    favoriteCRUD.insert(favorite)
-//////                    Toast.makeText(
-//////                        this@DetailUserActivity,
-//////                        "${favorite.username} telah ditambahkan ke data User Favorite",
-//////                        Toast.LENGTH_LONG
-//////                    ).show()
-////                }
-//            }
-//        }
-
-
     }
 
     private fun setTabViewPager() {
@@ -178,6 +133,21 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
                     .placeholder(R.drawable.waiting_image)
                     .into(imageView)
                 dialog.show()
+            }
+            R.id.btn_favorite -> {
+
+                val fav = FavoriteEntity()
+                fav.id = data.id.toString().toLong()
+                fav.login = data.login.toString()
+                fav.avatarUrl = data.avatarUrl.toString()
+                fav.type = data.type.toString()
+                favoriteViewModel.insert(fav)
+
+                makeText(
+                    this@UserDetailActivity,
+                    "${fav.login} telah ditambahkan ke data User Favorite",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
     }

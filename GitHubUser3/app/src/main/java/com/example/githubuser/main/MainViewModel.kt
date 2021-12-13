@@ -34,7 +34,7 @@ class MainViewModel : ViewModel() {
                     _snackbarText.value = Event("Hasil query dari $query")
 
                     if (users.value?.items?.size == 0) {
-                        _snackbarText.value = Event("Tidak hasil. Coba kata kunci yang lain...")
+                        _snackbarText.value = Event("Tidak ada hasil. Coba kata kunci yang lain...")
                     }
                 }
                 isLoading.value = false
