@@ -7,11 +7,11 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UserResponseItem(
 	@field:SerializedName("login")
-	val login: String? = null,
+	var login: String? = null,
 	@field:SerializedName("id")
-	val id: Long? = 0,
+	var id: Long? = 0,
 	@field:SerializedName("type")
-	val type: String? = null,
+	var type: String? = null,
 	@field:SerializedName("avatar_url")
-	val avatarUrl: String? = null
+	var avatarUrl: String? = null
 ) : Parcelable

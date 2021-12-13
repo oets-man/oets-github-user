@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GitHubUser">
         <activity
-            android:name=".favorite.FavoriteListAdapter"
+            android:name=".favorite.FavoriteAdapter"
             android:exported="false" />
         <activity
             android:name=".favorite.FavoriteActivity"

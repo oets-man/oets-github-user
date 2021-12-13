@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.model.UserResponseItem
 import com.example.githubuser.detail.UserDetailActivity
-import com.example.githubuser.UserListAdapter
+import com.example.githubuser.UserAdapter
+import com.example.githubuser.favorite.FavoriteEntity
 
 
 class FollowingFragment : Fragment() {
@@ -42,9 +43,9 @@ class FollowingFragment : Fragment() {
         })
 
         viewModel.getFollowing().observe(viewLifecycleOwner, {
-            val listUserAdapter = UserListAdapter(it)
+            val listUserAdapter = UserAdapter(it)
             binding.rvFollowing.adapter = listUserAdapter
-            listUserAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
+            listUserAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: UserResponseItem) {
                     showSelectedUser(data)
                 }

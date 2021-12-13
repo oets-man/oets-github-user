@@ -1,14 +1,15 @@
 package com.example.githubuser.favorite
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 
 class FavoriteViewModel(application: Application) : ViewModel() {
     private val mFavoriteRepository: FavoriteRepository = FavoriteRepository(application)
 
-//    fun getAllFavorites(): LiveData<List<FavoriteEntity>> {
-//        return mFavoriteRepository.getAllFavorites()
-//    }
+    fun getAllFavorites(): LiveData<List<FavoriteEntity>> {
+        return mFavoriteRepository.getAllFavorites()
+    }
 
     fun insert(favorite: FavoriteEntity) {
         mFavoriteRepository.insert(favorite)
@@ -20,5 +21,13 @@ class FavoriteViewModel(application: Application) : ViewModel() {
 
     fun delete(favorite: FavoriteEntity) {
         mFavoriteRepository.delete(favorite)
+    }
+
+    fun getUserFavoriteById(id:Long){
+        mFavoriteRepository.getUserFavoriteById(id)
+    }
+
+    fun deleteById(id:Long){
+        mFavoriteRepository.deleteById(id)
     }
 }

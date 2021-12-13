@@ -20,4 +20,7 @@ interface FavoriteDao {
 
     @Query("SELECT  * from FavoriteEntity WHERE id = :id")
     fun getUserFavoriteById(id: Long): LiveData<List<FavoriteEntity>>
+
+    @Query("DELETE from FavoriteEntity WHERE id = :id")
+    fun deleteById(id: Long)
 }

@@ -13,7 +13,7 @@
         android:clipToPadding="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/adapter_favorite_list" />
+        tools:listitem="@layout/adapter_user" />
 
     <ProgressBar
         android:id="@+id/progressBarFavorite"

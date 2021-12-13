@@ -1,15 +1,17 @@
 package com.example.githubuser
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.githubuser.databinding.AdapterUserListBinding
+import com.example.githubuser.databinding.AdapterUserBinding
+import com.example.githubuser.favorite.FavoriteEntity
 import com.example.githubuser.model.UserResponseItem
 
-class UserListAdapter(private val listUser: ArrayList<UserResponseItem>) :
-    RecyclerView.Adapter<UserListAdapter.ListViewHolder>() {
+class UserAdapter(private val listUser: ArrayList<UserResponseItem>) :
+    RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -17,12 +19,12 @@ class UserListAdapter(private val listUser: ArrayList<UserResponseItem>) :
         this.onItemClickCallback = onItemClickCallback
     }
 
-    class ListViewHolder(var binding: AdapterUserListBinding) :
+    class ListViewHolder(var binding: AdapterUserBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListViewHolder {
         val binding =
-            AdapterUserListBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+            AdapterUserBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ListViewHolder(binding)
     }
 
@@ -40,6 +42,8 @@ class UserListAdapter(private val listUser: ArrayList<UserResponseItem>) :
         holder.binding.tvId.text =
             holder.itemView.context.getString(R.string.id, data.id.toString())
         holder.binding.tvType.text = holder.itemView.context.getString(R.string.type, data.type)
+
+        holder.binding.trash.visibility = View.INVISIBLE
 
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(data) }
     }

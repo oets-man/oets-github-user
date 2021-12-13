@@ -8,14 +8,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,7 +18,9 @@ import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.setting.*
 import com.example.githubuser.detail.UserDetailActivity
-import com.example.githubuser.UserListAdapter
+import com.example.githubuser.UserAdapter
+import com.example.githubuser.favorite.FavoriteActivity
+import com.example.githubuser.favorite.FavoriteEntity
 //import com.example.githubuser.favorite.FavoriteActivity
 import com.example.githubuser.model.UserResponseItem
 import com.google.android.material.snackbar.Snackbar
@@ -46,20 +42,14 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Cari User GitHub"
 
-        val layoutManager = LinearLayoutManager(this)
-        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
-        binding?.rvUsers?.setHasFixedSize(true)
-        binding?.rvUsers?.layoutManager = layoutManager
-        binding?.rvUsers?.addItemDecoration(itemDecoration)
-
         showRecyclerList()
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.showUsersBy("sidi")
         viewModel.getUsers().observe(this, {
-            val listUserAdapter = UserListAdapter(it.items)
+            val listUserAdapter = UserAdapter(it.items)
             binding?.rvUsers?.adapter = listUserAdapter
-            listUserAdapter.setOnItemClickCallback(object : UserListAdapter.OnItemClickCallback {
+            listUserAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: UserResponseItem) {
                     showSelectedUser(data)
                 }
@@ -70,10 +60,7 @@ class MainActivity : AppCompatActivity() {
             showLoading(it)
         })
 
-//        showTheme() // MENYEBABKAN LOADING DUA KALI ?????
-
         snackBar()
-
     }
 
     private fun snackBar() {
@@ -106,6 +93,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showRecyclerList() {
+
+        val layoutManager = LinearLayoutManager(this)
+        val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
+        binding?.rvUsers?.setHasFixedSize(true)
+        binding?.rvUsers?.layoutManager = layoutManager
+        binding?.rvUsers?.addItemDecoration(itemDecoration)
+
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             binding?.rvUsers?.layoutManager = GridLayoutManager(this, 2)
         } else {
@@ -162,10 +156,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.listFavorite -> {
-//                val intent = Intent(
-//                    this, FavoriteActivity::class.java
-//                )
-//                startActivity(intent)
+                val intent = Intent(
+                    this, FavoriteActivity::class.java
+                )
+                startActivity(intent)
             }
         }
         return true

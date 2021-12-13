@@ -31,4 +31,8 @@ class FavoriteRepository(application: Application) {
     fun getUserFavoriteById(id: Long): LiveData<List<FavoriteEntity>> =
         mFavoritesDao.getUserFavoriteById(id)
 
+    fun deleteById(id:Long){
+        executorService.execute {mFavoritesDao.deleteById(id)}
+    }
+
 }

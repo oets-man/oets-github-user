@@ -8,6 +8,19 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
+    <ImageButton
+        android:id="@+id/trash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_delete_24"
+        card_view:layout_constraintBottom_toBottomOf="parent"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        />
+
     <ImageView
         android:id="@+id/img_avatar"
         android:layout_width="100dp"

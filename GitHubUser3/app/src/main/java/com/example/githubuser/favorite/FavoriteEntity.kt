@@ -22,5 +22,4 @@ data class FavoriteEntity(
     @ColumnInfo(name = "type")
     var type: String? = null
 
-)
-    : Parcelable
+) : Parcelable
