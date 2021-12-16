@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.databinding.FragmentFollowingBinding
-import com.example.githubuser.model.UserResponseItem
-import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.UserAdapter
-import com.example.githubuser.favorite.FavoriteEntity
+import com.example.githubuser.databinding.FragmentFollowingBinding
+import com.example.githubuser.detail.UserDetailActivity
+import com.example.githubuser.model.UserResponseItem
 
 
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     private lateinit var viewModel: FollowingViewModel
 
@@ -26,7 +25,7 @@ class FollowingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowingBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +33,7 @@ class FollowingFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[FollowingViewModel::class.java]
 
         val dataUser = activity?.intent?.getParcelableExtra<UserResponseItem>(UserDetailActivity.EXTRA_USER) as UserResponseItem
-        binding.rvFollowing.layoutManager = LinearLayoutManager(activity)
+        binding?.rvFollowing?.layoutManager = LinearLayoutManager(activity)
 
         viewModel.loadData(dataUser.login ?: "")
 
@@ -44,7 +43,7 @@ class FollowingFragment : Fragment() {
 
         viewModel.getFollowing().observe(viewLifecycleOwner, {
             val listUserAdapter = UserAdapter(it)
-            binding.rvFollowing.adapter = listUserAdapter
+            binding?.rvFollowing?.adapter = listUserAdapter
             listUserAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: UserResponseItem) {
                     showSelectedUser(data)
@@ -61,12 +60,10 @@ class FollowingFragment : Fragment() {
         }
     }
 
+
+
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBarFollowing.visibility = View.VISIBLE
-        } else {
-            binding.progressBarFollowing.visibility = View.GONE
-        }
+        binding?.progressBarFollowing?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

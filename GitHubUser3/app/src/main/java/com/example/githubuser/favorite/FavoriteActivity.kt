@@ -3,20 +3,18 @@ package com.example.githubuser.favorite
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.databinding.ActivityFavoriteBinding
 import com.example.githubuser.detail.UserDetailActivity
+import com.example.githubuser.main.MainActivity
 import com.example.githubuser.model.UserResponseItem
-import kotlinx.coroutines.DelicateCoroutinesApi
-import java.nio.file.Files.delete
 
 class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
@@ -46,9 +44,15 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
         showRecyclerList()
 
+        binding?.fabHome?.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         // set click listener
         adapter.listenerItem = this
         adapter.listenerTrash = this
+
     }
 
 

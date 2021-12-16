@@ -1,7 +1,7 @@
 package com.example.githubuser.detail
 
-import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.githubuser.R
+import com.example.githubuser.SectionsPagerAdapter
 import com.example.githubuser.databinding.ActivityUserDetailBinding
+import com.example.githubuser.favorite.*
+import com.example.githubuser.main.MainActivity
 import com.example.githubuser.model.UserDetailResponse
 import com.example.githubuser.model.UserResponseItem
-import com.example.githubuser.SectionsPagerAdapter
-import com.example.githubuser.favorite.*
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -59,19 +61,20 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             Log.d("favv", isFavorite.toString())
 
             if (isFavorite) {
-                binding?.btnFavorite?.setImageResource(android.R.drawable.btn_star_big_on)
+                binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_24)
             } else {
-                binding?.btnFavorite?.setImageResource(android.R.drawable.btn_star_big_off)
+                binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_border_24)
             }
         })
 
         binding?.btnFavorite?.setOnClickListener(this)
+        binding?.fabHome?.setOnClickListener(this)
     }
 
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = FavoriteViewFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
     private fun showUser(user: UserDetailResponse) {
@@ -82,6 +85,9 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
                 .error(R.drawable.error_image)
                 .placeholder(R.drawable.waiting_image)
                 .into(imgDetailAvatar)
+
+
+//            ImageView.loadImage(imgDetailAvatar)
 
             imgDetailAvatar.borderWidth = 10
             imgDetailAvatar.borderColor = orange
@@ -96,6 +102,16 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             progressBarDetail.visibility = View.GONE
             imgDetailAvatar.setOnClickListener(this@UserDetailActivity)
         }
+
+    }
+
+    //how to use this?
+    fun ImageView.loadImage(url: String?) {
+        Glide.with(this.context)
+            .load(url)
+            .apply(RequestOptions().override(500, 500))
+            .centerCrop()
+            .into(this)
     }
 
     private fun setTabViewPager() {
@@ -140,6 +156,10 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
                 makeText(
                     this@UserDetailActivity, msg, Toast.LENGTH_LONG
                 ).show()
+            }
+            R.id.fabHome -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }

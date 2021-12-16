@@ -76,22 +76,6 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-//    private fun showTheme() {
-        //ambil data dari view model
-//        val pref = ThemePreferences.getInstance(dataStore)
-//        val themeViewModel =
-//            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
-//        themeViewModel.getThemeSettings().observe(this,
-//            { isDarkModeActive: Boolean ->
-//                if (isDarkModeActive) {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                } else {
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                }
-//            })
-//    }
-
-
     private fun showRecyclerList() {
 
         val layoutManager = LinearLayoutManager(this)
@@ -114,11 +98,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding?.progressBar?.visibility = View.VISIBLE
-        } else {
-            binding?.progressBar?.visibility = View.GONE
-        }
+        binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -6,10 +6,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
-    companion object{
+    companion object {
         fun getApiService(): ApiService {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            /*
+            Saat menggunakan logging interceptor, pastikan kembali pesan log hanya akan ditampilkan pada mode debug.
+            apa maksudnya????
+             */
+
+
             val client = OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build()

@@ -1,8 +1,6 @@
 package com.example.githubuser.main
 
-import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,7 +40,8 @@ class MainViewModel : ViewModel() {
 
             override fun onFailure(call: Call<UserSearchResponse>, t: Throwable) {
                 isLoading.value = false
-                Log.e("x", t.message.toString())
+                Log.e("main", t.message.toString())
+                _snackbarText.value = Event(t.message.toString())
             }
         })
     }

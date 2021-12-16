@@ -23,7 +23,7 @@ class UserDetailViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
-                        detailUser.value = data
+                        detailUser.value = data!!
                     }
                 } else {
                     Log.e("user_detail_activity", response.message())

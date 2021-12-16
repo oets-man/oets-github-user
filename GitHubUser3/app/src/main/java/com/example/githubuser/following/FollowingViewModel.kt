@@ -26,7 +26,7 @@ class FollowingViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        following.value = responseBody
+                        following.value = responseBody!!
                     }
                 } else {
                     Log.e("responnotsuccess", "Mungin kena limit")

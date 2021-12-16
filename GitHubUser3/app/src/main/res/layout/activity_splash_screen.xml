@@ -9,6 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:contentDescription="@string/splash_screen"
         android:src="@drawable/ic_monstr_github"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -26,7 +26,7 @@ class FollowersViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        followers.value = responseBody
+                        followers.value = responseBody!!
                     }
                 } else {
                     Log.e("responnotsuccess", "Mungkin kena limit")

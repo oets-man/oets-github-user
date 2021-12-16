@@ -5,14 +5,12 @@
     <item
         android:id="@+id/listFavorite"
         android:icon="@drawable/ic_favorite_24"
-        android:title="@string/Favorite"
-        />
+        android:title="@string/Favorite" />
 
     <item
         android:id="@+id/switch_theme"
         android:icon="@drawable/ic_settings_24"
-        android:title="@string/pengaturan"
-        />
+        android:title="@string/pengaturan" />
 
 
     <item

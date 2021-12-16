@@ -1,9 +1,9 @@
 package com.example.githubuser.setting
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -23,9 +23,6 @@ class ThemeActivity : AppCompatActivity() {
 
         val pref = ThemePreferences.getInstance(dataStore)
 
-        /*
-        Ketika MainActivity membutuhkan ViewModel, kita akan memanggil kelas ViewModelFactory untuk membuat ViewModel seperti berikut:
-         */
         val themeViewModel =
             ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
         themeViewModel.getThemeSettings().observe(this,

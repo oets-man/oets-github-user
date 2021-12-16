@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.databinding.FragmentFollowerBinding
-import com.example.githubuser.model.UserResponseItem
-import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.UserAdapter
-import com.example.githubuser.favorite.FavoriteEntity
+import com.example.githubuser.databinding.FragmentFollowerBinding
+import com.example.githubuser.detail.UserDetailActivity
+import com.example.githubuser.model.UserResponseItem
 
 class FollowerFragment : Fragment() {
     private var _binding: FragmentFollowerBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     private lateinit var viewModel: FollowersViewModel
 
@@ -25,14 +24,14 @@ class FollowerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFollowerBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity())[FollowersViewModel::class.java]
 
-        binding.rvFollower.layoutManager = LinearLayoutManager(activity)
+        binding?.rvFollower?.layoutManager = LinearLayoutManager(activity)
 
         val dataUser = activity?.intent?.getParcelableExtra<UserResponseItem>(UserDetailActivity.EXTRA_USER) as UserResponseItem
 
@@ -44,7 +43,7 @@ class FollowerFragment : Fragment() {
 
         viewModel.getFollowers().observe(viewLifecycleOwner, {
             val adapter = UserAdapter(it)
-            binding.rvFollower.adapter = adapter
+            binding?.rvFollower?.adapter = adapter
             adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: UserResponseItem) { showSelectedUser(data) }
             })
@@ -60,12 +59,9 @@ class FollowerFragment : Fragment() {
         )
     }
 
+
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBarFollower.visibility = View.VISIBLE
-        } else {
-            binding.progressBarFollower.visibility = View.GONE
-        }
+        binding?.progressBarFollower?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

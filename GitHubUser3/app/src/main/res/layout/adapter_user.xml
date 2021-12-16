@@ -19,7 +19,7 @@
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        />
+        android:contentDescription="TODO" />
 
     <ImageView
         android:id="@+id/img_avatar"
