@@ -13,7 +13,6 @@ class ThemePreferences private constructor(private val dataStore: DataStore<Pref
     membaca dan menyimpan data pengaturan tema yang berupa Boolean ke dalam DataStore
     Untuk menyimpan data, yang Anda perlukan hanyalah instance DataStore dan Key pada SettingPreferences.
      */
-    private val THEME_KEY = booleanPreferencesKey("theme_setting")
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
             preferences[THEME_KEY] ?: false
@@ -37,6 +36,8 @@ class ThemePreferences private constructor(private val dataStore: DataStore<Pref
     melainkan melalui fungsi getInstance yang berfungsi sebagai Singleton seperti berikut:
      */
     companion object {
+        val THEME_KEY = booleanPreferencesKey("theme_setting")
+
         @Volatile
         private var INSTANCE: ThemePreferences? = null
 

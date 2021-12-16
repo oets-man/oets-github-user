@@ -1,5 +1,6 @@
 package com.example.githubuser.favorite
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,7 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
         binding?.rvFavorite?.setHasFixedSize(true)
         binding?.rvFavorite?.adapter = adapter
 
-        val viewModel = obtainViewModel(this)
+        viewModel = obtainViewModel(this)
         viewModel.getAllFavorites().observe(this, { list ->
             if (list != null) {
                 adapter.setList(list)
@@ -51,13 +52,13 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
 
-
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = FavoriteViewFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
     private fun showRecyclerList() {
+        binding?.progressBarFavorite?.visibility = View.VISIBLE
 
         val layoutManager = LinearLayoutManager(this)
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
@@ -70,6 +71,8 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
         } else {
             binding?.rvFavorite?.layoutManager = LinearLayoutManager(this)
         }
+
+        binding?.progressBarFavorite?.visibility = View.GONE
     }
 
 
@@ -86,12 +89,12 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
     override fun onItemClicked(view: View, favorite: FavoriteEntity) {
-        val id = favorite.id.toString().toLong()
-        Toast.makeText(
-            this,
-            "${favorite.login} ($id) berhasil di klik",
-            Toast.LENGTH_SHORT
-        ).show()
+
+//        Toast.makeText(
+//            this,
+//            "${favorite.login} (${favorite.id}) berhasil di klik",
+//            Toast.LENGTH_SHORT
+//        ).show()
 
         val user = UserResponseItem()
         user.id = favorite.id.toString().toLong()
@@ -103,14 +106,14 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onTrashClicked(view: View, favorite: FavoriteEntity) {
         // toas sukses
-        Toast.makeText(
-            this,
-            "tes siapa yang tampil ${favorite.login}",
-            Toast.LENGTH_SHORT
-        ).show()
-//        viewModel.delete(favorite)
+//        Toast.makeText(
+//            this,
+//            "tes siapa yang tampil ${favorite.login}",
+//            Toast.LENGTH_SHORT
+//        ).show()
 
         val dialogTitle = "Konfirmasi"
         val dialogMessage = "Yakin menghapus ${favorite.login} dari daftar favorit?"
@@ -121,8 +124,8 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
             setMessage(dialogMessage)
             setCancelable(false)
             setPositiveButton("Ya") { _, _ ->
-//                viewModel.deleteById(favorite.id)     //ini gagal
-                viewModel.delete(favorite)            //ini juga gagal
+                viewModel.delete(favorite)
+                recreate() //perlu refresh
             }
             setNegativeButton("Tidak") { dialog, _ -> dialog.cancel() }
         }

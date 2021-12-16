@@ -15,12 +15,14 @@
         android:layout_marginEnd="16dp"
 
         android:background="@color/transparent"
-        android:src="@drawable/ic_favorite_border_48"
+
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_favorite_border_24"
+
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_detail_avatar"

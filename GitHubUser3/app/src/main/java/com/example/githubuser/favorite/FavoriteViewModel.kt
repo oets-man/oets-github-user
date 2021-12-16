@@ -11,6 +11,10 @@ class FavoriteViewModel(application: Application) : ViewModel() {
         return mFavoriteRepository.getAllFavorites()
     }
 
+    fun getUserFavoriteById(id:Long): LiveData<List<FavoriteEntity>>{
+        return mFavoriteRepository.getUserFavoriteById(id)
+    }
+
     fun insert(favorite: FavoriteEntity) {
         mFavoriteRepository.insert(favorite)
     }
@@ -23,9 +27,6 @@ class FavoriteViewModel(application: Application) : ViewModel() {
         mFavoriteRepository.delete(favorite)
     }
 
-    fun getUserFavoriteById(id:Long){
-        mFavoriteRepository.getUserFavoriteById(id)
-    }
 
     fun deleteById(id:Long){
         mFavoriteRepository.deleteById(id)

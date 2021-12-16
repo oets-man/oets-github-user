@@ -15,19 +15,19 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
-import com.example.githubuser.databinding.ActivityMainBinding
-import com.example.githubuser.setting.*
-import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.UserAdapter
+import com.example.githubuser.databinding.ActivityMainBinding
+import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.favorite.FavoriteActivity
-import com.example.githubuser.favorite.FavoriteEntity
-//import com.example.githubuser.favorite.FavoriteActivity
 import com.example.githubuser.model.UserResponseItem
+import com.example.githubuser.setting.*
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.DelicateCoroutinesApi
 import retrofit2.*
 
 //private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+@DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun showTheme() {
+//    private fun showTheme() {
         //ambil data dari view model
 //        val pref = ThemePreferences.getInstance(dataStore)
 //        val themeViewModel =
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 //                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //                }
 //            })
-    }
+//    }
 
 
     private fun showRecyclerList() {

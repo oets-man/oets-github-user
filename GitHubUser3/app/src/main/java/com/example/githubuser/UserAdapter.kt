@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.githubuser.databinding.AdapterUserBinding
-import com.example.githubuser.favorite.FavoriteEntity
 import com.example.githubuser.model.UserResponseItem
 
 class UserAdapter(private val listUser: ArrayList<UserResponseItem>) :

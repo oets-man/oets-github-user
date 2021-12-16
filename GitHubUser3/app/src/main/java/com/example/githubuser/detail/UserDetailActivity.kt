@@ -1,8 +1,10 @@
 package com.example.githubuser.detail
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -31,13 +33,7 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private var isFavorite = false
 
-    private var favorite: FavoriteEntity? = null
     private lateinit var favoriteViewModel: FavoriteViewModel
-
-    //
-//
-    lateinit var db: FavoriteDatabase
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,35 +52,26 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
             showUser(it)
         })
 
-//        binding?.btnFavorite?.setOnClickListener {
-//            updateFavorite()
-//        }
+
         favoriteViewModel = obtainViewModel(this@UserDetailActivity)
+        favoriteViewModel.getUserFavoriteById(data.id.toString().toLong()).observe(this, {
+            isFavorite = it.isNotEmpty()
+            Log.d("favv", isFavorite.toString())
+
+            if (isFavorite) {
+                binding?.btnFavorite?.setImageResource(android.R.drawable.btn_star_big_on)
+            } else {
+                binding?.btnFavorite?.setImageResource(android.R.drawable.btn_star_big_off)
+            }
+        })
+
         binding?.btnFavorite?.setOnClickListener(this)
     }
+
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = FavoriteViewFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
-    }
-
-    private fun updateFavorite() {
-        //inisialisasi Database
-//        db = Room
-//            .databaseBuilder(applicationContext, FavoriteDatabase::class.java, "favorite-db")
-//            .build()
-//
-//        GlobalScope.launch {
-//            val favorite = FavoriteEntity(
-//                data.id.toString().toLong(),
-//                data.login.toString(),
-//                data.avatarUrl.toString(),
-//                data.type.toString()
-//            )
-//            //insert data ke database
-//            db.favoriteDao().insert(favorite)
-//        }
-//        Toast.makeText(this, "${data.login} sudah berhasil ditambahkan.", Toast.LENGTH_SHORT).show()
     }
 
     private fun showUser(user: UserDetailResponse) {
@@ -135,18 +122,23 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
                 dialog.show()
             }
             R.id.btn_favorite -> {
-
+                val msg: String
                 val fav = FavoriteEntity()
                 fav.id = data.id.toString().toLong()
                 fav.login = data.login.toString()
                 fav.avatarUrl = data.avatarUrl.toString()
                 fav.type = data.type.toString()
-                favoriteViewModel.insert(fav)
+
+                if (isFavorite) {
+                    favoriteViewModel.delete(fav)
+                    msg = "${fav.login} telah dihapus dari data User Favorite"
+                } else {
+                    favoriteViewModel.insert(fav)
+                    msg = "${fav.login} telah ditambahkan ke data User Favorite"
+                }
 
                 makeText(
-                    this@UserDetailActivity,
-                    "${fav.login} telah ditambahkan ke data User Favorite",
-                    Toast.LENGTH_LONG
+                    this@UserDetailActivity, msg, Toast.LENGTH_LONG
                 ).show()
             }
         }
@@ -154,7 +146,6 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-
         _binding = null
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.githubuser">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GitHubUser">
+        <activity
+            android:name=".favorite.FavoriteAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".favorite.FavoriteActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".setting.ThemeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@style/Theme.GitHubUser.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".detail.UserDetailActivity"
+            android:exported="false"
+            android:label="@string/activity_user_detail" />
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

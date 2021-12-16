@@ -27,7 +27,7 @@ class ThemeActivity : AppCompatActivity() {
         Ketika MainActivity membutuhkan ViewModel, kita akan memanggil kelas ViewModelFactory untuk membuat ViewModel seperti berikut:
          */
         val themeViewModel =
-            ViewModelProvider(this, ThemeViewModelFactory(pref,))[ThemeViewModel::class.java]
+            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
         themeViewModel.getThemeSettings().observe(this,
             { isDarkModeActive: Boolean ->
                 if (isDarkModeActive) {
