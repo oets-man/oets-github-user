@@ -13,21 +13,17 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("search/users")
-    @Headers(BuildConfig.API_KEY)
     fun getUserBy(@Query("q") query: String): Call<UserSearchResponse>
 
     @GET("users/{login}")
-    @Headers(BuildConfig.API_KEY)
     fun getUserDetail(@Path("login") login: String): Call<UserDetailResponse>
 
     @GET("users/{login}/followers")
-    @Headers(BuildConfig.API_KEY)
     fun getFollowers(
         @Path("login") login: String
     ): Call<ArrayList<UserResponseItem>>
 
     @GET("users/{login}/following")
-    @Headers(BuildConfig.API_KEY)
     fun getFollowing(
         @Path("login") login: String
     ): Call<ArrayList<UserResponseItem>>

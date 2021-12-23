@@ -11,7 +11,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserDetailViewModel : ViewModel() {
-    private val detailUser = MutableLiveData<UserDetailResponse>()
+    private val detailUser = MutableLiveData<UserDetailResponse?>()
 
     fun loadDetailUser(login: String) {
         ApiConfig.getApiService().getUserDetail(login).enqueue(object :
@@ -23,7 +23,7 @@ class UserDetailViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {
-                        detailUser.value = data!!
+                        detailUser.value = data
                     }
                 } else {
                     Log.e("user_detail_activity", response.message())
@@ -37,7 +37,7 @@ class UserDetailViewModel : ViewModel() {
         })
     }
 
-    fun getDetailUser() : LiveData<UserDetailResponse> {
+    fun getDetailUser() : LiveData<UserDetailResponse?> {
         return detailUser
     }
 }

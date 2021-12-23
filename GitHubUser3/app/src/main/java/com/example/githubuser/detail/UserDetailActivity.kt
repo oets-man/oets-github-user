@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.githubuser.R
 import com.example.githubuser.SectionsPagerAdapter
 import com.example.githubuser.databinding.ActivityUserDetailBinding
@@ -77,41 +76,31 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
         return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
-    private fun showUser(user: UserDetailResponse) {
+    private fun showUser(user: UserDetailResponse?) {
         val orange = Color.rgb(255, 165, 0)
         binding?.apply {
-            Glide.with(this@UserDetailActivity)
-                .load(user.avatarUrl)
-                .error(R.drawable.error_image)
-                .placeholder(R.drawable.waiting_image)
-                .into(imgDetailAvatar)
+            if (user != null) {
+                Glide.with(this@UserDetailActivity)
+                    .load(user.avatarUrl)
+                    .error(R.drawable.error_image)
+                    .placeholder(R.drawable.waiting_image)
+                    .into(imgDetailAvatar)
 
-
-//            ImageView.loadImage(imgDetailAvatar)
-
-            imgDetailAvatar.borderWidth = 10
-            imgDetailAvatar.borderColor = orange
-            tvDetailNama.text = user.name
-            tvDetailUser.text = user.login
-            tvDetailLokasi.text = StringBuilder("Location: ${user.location}")
-            tvDetailCompany.text = StringBuilder("Company: ${user.company}")
-            tvDetailRepository.text = StringBuilder("Repository: ${user.publicRepos}")
-            tvDetailFollower.text = StringBuilder("Follower: ${user.followers}")
-            tvDetailFollowing.text = StringBuilder("Following: ${user.following}")
+                imgDetailAvatar.borderWidth = 10
+                imgDetailAvatar.borderColor = orange
+                tvDetailNama.text = user.name
+                tvDetailUser.text = user.login
+                tvDetailLokasi.text = StringBuilder("Location: ${user.location}")
+                tvDetailCompany.text = StringBuilder("Company: ${user.company}")
+                tvDetailRepository.text = StringBuilder("Repository: ${user.publicRepos}")
+                tvDetailFollower.text = StringBuilder("Follower: ${user.followers}")
+                tvDetailFollowing.text = StringBuilder("Following: ${user.following}")
+            }
 
             progressBarDetail.visibility = View.GONE
             imgDetailAvatar.setOnClickListener(this@UserDetailActivity)
         }
 
-    }
-
-    //how to use this?
-    fun ImageView.loadImage(url: String?) {
-        Glide.with(this.context)
-            .load(url)
-            .apply(RequestOptions().override(500, 500))
-            .centerCrop()
-            .into(this)
     }
 
     private fun setTabViewPager() {
@@ -145,12 +134,12 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
                 fav.avatarUrl = data.avatarUrl.toString()
                 fav.type = data.type.toString()
 
-                if (isFavorite) {
+                msg = if (isFavorite) {
                     favoriteViewModel.delete(fav)
-                    msg = "${fav.login} telah dihapus dari data User Favorite"
+                    "${fav.login} telah dihapus dari data User Favorite"
                 } else {
                     favoriteViewModel.insert(fav)
-                    msg = "${fav.login} telah ditambahkan ke data User Favorite"
+                    "${fav.login} telah ditambahkan ke data User Favorite"
                 }
 
                 makeText(
@@ -171,7 +160,6 @@ class UserDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val EXTRA_USER = "extra_user"
-        const val EXTRA_FAVORITE = "extra_favorite"
 
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,

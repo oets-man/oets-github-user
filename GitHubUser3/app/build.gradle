@@ -22,7 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_KEY", '"Authorization: token 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"')
+        buildConfigField("String", "API_KEY", '"token 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"')
     }
 
     buildTypes {

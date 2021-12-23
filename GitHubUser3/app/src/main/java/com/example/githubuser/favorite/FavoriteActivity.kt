@@ -15,7 +15,9 @@ import com.example.githubuser.databinding.ActivityFavoriteBinding
 import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.main.MainActivity
 import com.example.githubuser.model.UserResponseItem
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     private var _binding: ActivityFavoriteBinding? = null
@@ -37,6 +39,7 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
         viewModel = obtainViewModel(this)
         viewModel.getAllFavorites().observe(this, { list ->
+            binding?.tvDataIsEmpty?.visibility = if(list.isEmpty()) View.VISIBLE else View.INVISIBLE
             if (list != null) {
                 adapter.setList(list)
             }
@@ -93,13 +96,6 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
     override fun onItemClicked(view: View, favorite: FavoriteEntity) {
-
-//        Toast.makeText(
-//            this,
-//            "${favorite.login} (${favorite.id}) berhasil di klik",
-//            Toast.LENGTH_SHORT
-//        ).show()
-
         val user = UserResponseItem()
         user.id = favorite.id.toString().toLong()
         user.login = favorite.login.toString()
@@ -112,13 +108,6 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onTrashClicked(view: View, favorite: FavoriteEntity) {
-        // toas sukses
-//        Toast.makeText(
-//            this,
-//            "tes siapa yang tampil ${favorite.login}",
-//            Toast.LENGTH_SHORT
-//        ).show()
-
         val dialogTitle = "Konfirmasi"
         val dialogMessage = "Yakin menghapus ${favorite.login} dari daftar favorit?"
 
@@ -129,7 +118,7 @@ class FavoriteActivity : AppCompatActivity(), RecyclerViewClickListener {
             setCancelable(false)
             setPositiveButton("Ya") { _, _ ->
                 viewModel.delete(favorite)
-                recreate() //perlu refresh
+                recreate()
             }
             setNegativeButton("Tidak") { dialog, _ -> dialog.cancel() }
         }

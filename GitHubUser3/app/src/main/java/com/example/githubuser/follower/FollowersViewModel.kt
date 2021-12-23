@@ -25,9 +25,7 @@ class FollowersViewModel : ViewModel() {
                 isLoading.value = false
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    if (responseBody != null) {
-                        followers.value = responseBody!!
-                    }
+                    followers.value = responseBody ?: ArrayList()
                 } else {
                     Log.e("responnotsuccess", "Mungkin kena limit")
                 }

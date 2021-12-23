@@ -25,8 +25,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.DelicateCoroutinesApi
 import retrofit2.*
 
-//private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
-
 @DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
@@ -47,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.showUsersBy("sidi")
         viewModel.getUsers().observe(this, {
+            binding?.tvDataIsEmpty?.visibility = if(it.items.isEmpty()) View.VISIBLE else View.INVISIBLE
+
             val listUserAdapter = UserAdapter(it.items)
             binding?.rvUsers?.adapter = listUserAdapter
             listUserAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {

@@ -16,9 +16,11 @@ import com.example.githubuser.main.MainActivity
 import com.example.githubuser.setting.ThemePreferences
 import com.example.githubuser.setting.ThemeViewModel
 import com.example.githubuser.setting.ThemeViewModelFactory
+import kotlinx.coroutines.DelicateCoroutinesApi
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
+@DelicateCoroutinesApi
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

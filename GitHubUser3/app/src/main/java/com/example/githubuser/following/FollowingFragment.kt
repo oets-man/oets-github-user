@@ -12,8 +12,9 @@ import com.example.githubuser.UserAdapter
 import com.example.githubuser.databinding.FragmentFollowingBinding
 import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.model.UserResponseItem
+import kotlinx.coroutines.DelicateCoroutinesApi
 
-
+@DelicateCoroutinesApi
 class FollowingFragment : Fragment() {
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding
@@ -42,6 +43,7 @@ class FollowingFragment : Fragment() {
         })
 
         viewModel.getFollowing().observe(viewLifecycleOwner, {
+            binding?.tvDataIsEmpty?.visibility = if(it.isEmpty()) View.VISIBLE else View.INVISIBLE
             val listUserAdapter = UserAdapter(it)
             binding?.rvFollowing?.adapter = listUserAdapter
             listUserAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {

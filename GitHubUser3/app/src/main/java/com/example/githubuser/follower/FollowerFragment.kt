@@ -12,7 +12,9 @@ import com.example.githubuser.UserAdapter
 import com.example.githubuser.databinding.FragmentFollowerBinding
 import com.example.githubuser.detail.UserDetailActivity
 import com.example.githubuser.model.UserResponseItem
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@DelicateCoroutinesApi
 class FollowerFragment : Fragment() {
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding
@@ -42,6 +44,7 @@ class FollowerFragment : Fragment() {
         })
 
         viewModel.getFollowers().observe(viewLifecycleOwner, {
+            binding?.tvDataIsEmpty?.visibility = if(it.isEmpty()) View.VISIBLE else View.INVISIBLE
             val adapter = UserAdapter(it)
             binding?.rvFollower?.adapter = adapter
             adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {

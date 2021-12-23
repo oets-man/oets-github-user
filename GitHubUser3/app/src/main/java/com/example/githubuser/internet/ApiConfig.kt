@@ -1,23 +1,23 @@
 package com.example.githubuser.internet
 
+import com.example.githubuser.BuildConfig
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
         fun getApiService(): ApiService {
-            val loggingInterceptor =
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            /*
-            Saat menggunakan logging interceptor, pastikan kembali pesan log hanya akan ditampilkan pada mode debug.
-            apa maksudnya????
-             */
-
-
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor { chain ->
+                    val request: Request = chain.request()
+                    val newRequest: Request = request.newBuilder()
+                        .addHeader("Authorization", BuildConfig.API_KEY)
+                        .build()
+
+                    chain.proceed(newRequest)
+                }
                 .build()
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://api.github.com/")
@@ -28,3 +28,5 @@ class ApiConfig {
         }
     }
 }
+
+

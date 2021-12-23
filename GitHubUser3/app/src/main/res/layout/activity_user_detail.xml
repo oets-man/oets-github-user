@@ -10,17 +10,12 @@
         android:id="@+id/btn_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-
-        android:background="@color/transparent"
-
+        android:background="@android:color/transparent"
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:src="@drawable/ic_favorite_border_24"
-
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,15 +28,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/avatar_user"
-        tools:src="@tools:sample/avatars"
-        />
+        tools:src="@tools:sample/avatars" />
 
     <ProgressBar
         android:id="@+id/progressBarDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
         app:layout_constraintBottom_toBottomOf="@+id/img_detail_avatar"
         app:layout_constraintEnd_toEndOf="@+id/img_detail_avatar"
         app:layout_constraintStart_toStartOf="@+id/img_detail_avatar"

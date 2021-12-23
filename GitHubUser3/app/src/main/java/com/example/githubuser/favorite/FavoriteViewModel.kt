@@ -19,16 +19,7 @@ class FavoriteViewModel(application: Application) : ViewModel() {
         mFavoriteRepository.insert(favorite)
     }
 
-    fun update(favorite: FavoriteEntity) {
-        mFavoriteRepository.update(favorite)
-    }
-
     fun delete(favorite: FavoriteEntity) {
         mFavoriteRepository.delete(favorite)
-    }
-
-
-    fun deleteById(id:Long){
-        mFavoriteRepository.deleteById(id)
     }
 }

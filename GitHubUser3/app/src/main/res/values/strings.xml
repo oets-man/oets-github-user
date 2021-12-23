@@ -27,5 +27,7 @@
 
     <string name="home">Home</string>
     <string name="splash_screen">Splash Screen</string>
+    <string name="data_is_empty">Data Is Empty</string>
+    <string name="trash_button">Trash Button</string>
 
 </resources>
